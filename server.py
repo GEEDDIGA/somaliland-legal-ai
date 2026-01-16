@@ -38,7 +38,6 @@ def ask_legal_bot():
         # Isticmaalka Gemini oo leh awoodda raadinta (Tools: google_search)
         model = genai.GenerativeModel(
             model_name='gemini-1.5-flash',
-            tools=[{"google_search_retrieval": {}}]
         )
         
         # Isku darka Prompt-ka iyo su'aasha
