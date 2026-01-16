@@ -7,7 +7,10 @@ app = Flask(__name__)
 CORS(app)
 
 # 1. Habaynta Gemini
-GEMINI_API_KEY = "GELI_API_KEY_GAAGA_HALKAN"
+GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY", "GELI_API_KEY_GAAGA_HALKAN")
+if not GEMINI_API_KEY or GEMINI_API_KEY == "GELI_API_KEY_GAAGA_HALKAN":
+    raise RuntimeError("GOOGLE_API_KEY environment variable-ka waa in la deji")
+
 genai.configure(api_key=GEMINI_API_KEY)
 
 # 2. Prompt-ka rasmiga ah (System Instruction)
@@ -25,7 +28,7 @@ Qawaaniinta aad raacayso:
 
 @app.route('/ask', methods=['POST'])
 def ask_legal_bot():
-    data = request.json
+    data = request.json or {}
     user_question = data.get('question')
 
     if not user_question:
@@ -51,5 +54,9 @@ def ask_legal_bot():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/', methods=['GET'])
+def health():
+    return jsonify({"status": "ok", "message": "Somaliland Legal AI backend wuu shaqaynayaa."})
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
