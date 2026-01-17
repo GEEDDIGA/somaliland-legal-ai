@@ -14,7 +14,7 @@ if not GROQ_API_KEY:
 client = Groq(api_key=GROQ_API_KEY)
 
 # System prompt for Somaliland Legal AI
-SYSTEM_PROMPT = """Waxaad tahay Kaaliye Sharci oo ku takhasusay Shuruucda Somaliland (Somaliland Legal AI). 
+SYSTEM_PROMPT = """Waxaad tahay Kaaliye Sharci oo ku takhasusay Shuruucda Somaliland (Somaliland Legal AI).
 Shaqadaadu waa inaad ka jawaabto dacwadaha madaniga ah adigoo isticmaalaya shuruucda Somaliland.
 Qawaaniinta aad raacayso:
 1. Marka laguu soo diro su'aal, marka hore ka raadi xogta mareegta Somalilandlaw.com iyo ilaha rasmiga ah ee dawladda Somaliland.
@@ -35,32 +35,43 @@ def ask_legal_bot():
         message = client.chat.completions.create(
             model="mixtral-8x7b-32768",
             max_tokens=1024,
-                        messages=[
-                                {"role": "system", "content": SYSTEM_PROMPT},
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_question}
             ]
+        )
         
-        
-        answer = message.choices[0].message.content if message.content else "Maleesh, wax waaye"
-                    ]
-                )
+        answer = message.choices[0].message.content if message.choices else "Cilad ayaa dhacday"
         
         return jsonify({
             "answer": answer,
-            "disclaimer": "Xogtan waa kaaliye AI ah, la xidhiidh qareen rasmi ah wixii go'aan sharci ah."
+            "disclaimer": "Xogtan waa kaaliye AI ah, la xidhiidh qareen rasmi ah wixii go'aan sharci ah.",
+            "model": "mixtral-8x7b-32768"
         })
     
     except Exception as e:
         return jsonify({
-            "error": str(e),
+            "error": "Cilad ayaa dhacday. Fadlan isku day mar kale",
             "disclaimer": "Xogtan waa kaaliye AI ah, la xidhiidh qareen rasmi ah wixii go'aan sharci ah."
         }), 500
 
 @app.route('/', methods=['GET'])
+def root():
+    return jsonify({
+        "service": "Somaliland Legal AI",
+        "version": "1.0.0",
+        "endpoints": {
+            "/ask": "POST - Ask legal questions",
+            "/health": "GET - Health check"
+        }
+    })
+
+@app.route('/health', methods=['GET'])
 def health():
     return jsonify({
-        "status": "ok",
-        "message": "Somaliland Legal AI backend wuu shaqaynayaa."
+        "status": "healthy",
+        "message": "Somaliland Legal AI backend wuu shaqaynayaa.",
+        "version": "1.0.0"
     })
 
 if __name__ == '__main__':
