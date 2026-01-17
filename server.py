@@ -35,11 +35,11 @@ def ask_legal_bot():
         message = client.chat.completions.create(
             model="mixtral-8x7b-32768",
             max_tokens=1024,
-            system=SYSTEM_PROMPT,
-            messages=[
+                        messages=[
+                                {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_question}
             ]
-        )
+        
         
         answer = message.choices[0].message.content if message.content else "Maleesh, wax waaye"
         
