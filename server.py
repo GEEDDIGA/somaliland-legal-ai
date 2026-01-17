@@ -42,6 +42,8 @@ def ask_legal_bot():
         
         
         answer = message.choices[0].message.content if message.content else "Maleesh, wax waaye"
+                    ]
+                )
         
         return jsonify({
             "answer": answer,
