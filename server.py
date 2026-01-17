@@ -32,7 +32,7 @@ def ask_legal_bot():
         return jsonify({"error": "Fadlan su'aal soo qor"}), 400
     
     try:
-        message = client.messages.create(
+        message = client.chat.completions.create(
             model="mixtral-8x7b-32768",
             max_tokens=1024,
             system=SYSTEM_PROMPT,
@@ -41,7 +41,7 @@ def ask_legal_bot():
             ]
         )
         
-        answer = message.content[0].text if message.content else "Maleesh, wax waaye"
+        answer = message.choices[0].message.content if message.content else "Maleesh, wax waaye"
         
         return jsonify({
             "answer": answer,
