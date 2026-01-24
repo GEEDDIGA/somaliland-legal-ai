@@ -22,14 +22,14 @@ const botAnswer = (data && data.answer) ? data.answer : (data && data.error) ? d
 3. Changed default message to proper Somali: 'Cilad ayaa dhacday' (An error occurred)
 
 ## How to Apply:
-1. Go to WordPress Admin: https://www.goolle.shop/wp-admin/
+1. Go to WordPress Admin: https://www.geedi.org/wp-admin/
 2. Navigate to Code Snippets → Edit snippet ID 449
 3. Find line 86 (search for `const botAnswer =`)
 4. Replace the entire line with the fixed code above
 5. Click "Update" to save
 
 ## Testing:
-1. Open https://www.goolle.shop/
+1. Open https://www.geedi.org/
 2. Click the green chatbot button (⚖️)
 3. Ask a question in Somali
 4. The bot should now display proper responses instead of "undefined"
