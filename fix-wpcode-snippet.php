@@ -5,12 +5,12 @@
  * This script updates the broken JavaScript code in the WordPress WPCode snippet.
  * Upload this file to your WordPress root directory and access it via browser ONCE, then DELETE IT.
  * 
- * URL: https://www.goolle.shop/fix-wpcode-snippet.php
+ * URL: https://www.geedi.org/fix-wpcode-snippet.php
  */
 
 // SECURITY: Delete this file after running
 if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET['run'])) {
-    die('Access this file via: https://www.goolle.shop/fix-wpcode-snippet.php?run=fix');
+    die('Access this file via: https://www.geedi.org/fix-wpcode-snippet.php?run=fix');
 }
 
 if ($_GET['run'] !== 'fix') {
@@ -63,7 +63,7 @@ if ($result !== false) {
     echo '<hr>';
     echo '<h2>What was fixed:</h2>';
     echo '<pre>' . htmlspecialchars($fixed_code) . '</pre>';
-    echo '<p><a href="https://www.goolle.shop/">Test the chatbot</a></p>';
+    echo '<p><a href="https://www.geedi.org/">Test the chatbot</a></p>';
 } else {
     echo '<h1>❌ ERROR</h1>';
     echo '<p>Failed to update the snippet. Error: ' . $wpdb->last_error . '</p>';
