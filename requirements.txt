@@ -3,3 +3,5 @@ flask-cors
 google-generativeai
 gunicorn
 groq
+requests
+huggingface-hub
