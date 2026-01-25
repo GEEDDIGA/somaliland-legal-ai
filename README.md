@@ -2,8 +2,7 @@
 
 **Kaaliye Sharci oo AI ah oo ku takhasusay Shuruucda Somaliland**
 
-A Flask-based REST API that provides AI-powered legal assistance for Somaliland law using the Groq API with Mixtral model.
-
+A Flask-based REST API that provides AI-powered legal assistance for Somaliland law using Groq and HuggingFace APIs with Mixtral model. Features dual AI provider support, response caching, and production-ready optimizations.
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![Groq API](https://img.shields.io/badge/Groq-API-orange.svg)](https://groq.com/)
@@ -14,6 +13,9 @@ A Flask-based REST API that provides AI-powered legal assistance for Somaliland 
 - ✅ **Somali Language Support** - Provides legal assistance in Somali (af-Soomaali)
 - ✅ **Somaliland Law Focus** - References Somalilandlaw.com and official government sources
 - ✅ **Fast AI Responses** - Powered by Groq's Mixtral-8x7b-32768 model
+- - ✅ **Dual AI Provider** - Groq (primary) + HuggingFace (fallback) for maximum uptime
+- ✅ **Response Caching** - In-memory cache for common questions (1hr TTL, 50 items)
+- ✅ **Performance Optimized** - Cached client, optimized prompts, 0.4 temperature
 - ✅ **Rate Limiting** - API protection with configurable limits
 - ✅ **CORS Enabled** - Ready for web application integration
 - ✅ **Error Handling** - Comprehensive logging and error management
@@ -56,6 +58,7 @@ pip install -r requirements.txt
 # Create .env file
 echo "GROQ_API_KEY=your_api_key_here" > .env
 echo "PORT=5000" >> .env
+echo "HUGGINGFACE_API_KEY=your_huggingface_key_here" >> .env
 echo "FLASK_ENV=development" >> .env
 ```
 
@@ -142,6 +145,8 @@ Get API information and available endpoints.
 | `GROQ_API_KEY` | Your Groq API key from console.groq.com | ✅ Yes | - |
 | `PORT` | Server port number | ❌ No | 5000 |
 | `FLASK_ENV` | Environment (development/production) | ❌ No | production |
+| `HUGGINGFACE_API_KEY` | Your HuggingFace Inference API key | ❌ No | - |
+| `MAX_QUESTION_LENGTH` | Maximum question length in characters | ❌ No | 2000 |
 
 ## 🛡️ Rate Limiting
 
@@ -270,8 +275,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [ ] Add legal document templates
 - [ ] Create web frontend interface
 - [ ] Add authentication/authorization
-- [ ] Implement caching for common questions
-- [ ] Add support for legal document analysis
+- [x] Implement caching for common questions- [ ] Add support for legal document analysis
 - [ ] Multi-language support (Somali, English, Arabic)
 
 ---
